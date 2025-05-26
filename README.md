@@ -33,10 +33,10 @@ It will install / put `libbox2d.so` into `/usr/lib` and also the `/include` fold
 
 Box2D itself requires some dependencies:
 
-1. glad
-2. glfw
-3. imgui
-4. sajson
+1. glad (https://glad.dav1d.de/)
+2. glfw (https://www.glfw.org/)
+3. imgui (https://github.com/ocornut/imgui)
+4. sajson (https://github.com/chadaustin/sajson)
 
 they are already in the `dependencies/include` folder and you can move them to e.g. `/usr/include/` or you can learn by yourself to build then install them one by one if you haven't got one yet.
 
