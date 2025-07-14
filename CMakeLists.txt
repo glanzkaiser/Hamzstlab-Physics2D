@@ -1,4 +1,4 @@
-set (TESTBED_SOURCE_FILES
+set (HAMZSTLABPHYSICS_SOURCE_FILES
 	draw.cpp
 	draw.h
 	imgui_impl_glfw.cpp
@@ -11,6 +11,7 @@ set (TESTBED_SOURCE_FILES
 	test.cpp
 	test.h
 	tests/test.cpp
+	tests/ode_watertankmixing.cpp
 	tests/stir_liquid.cpp
 	tests/circular_motion.cpp
 	tests/circular_motionbox.cpp
@@ -58,10 +59,10 @@ set (TESTBED_SOURCE_FILES
 	tests/angular_oscillator.cpp
 )
 
-add_executable(testbed ${TESTBED_SOURCE_FILES})
-target_include_directories(testbed PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
-target_link_libraries(testbed PUBLIC box2d glfw imgui sajson glad)
-set_target_properties(testbed PROPERTIES
+add_executable(hamzstlabphysics ${HAMZSTLABPHYSICS_SOURCE_FILES})
+target_include_directories(hamzstlabphysics PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+target_link_libraries(hamzstlabphysics PUBLIC box2d glfw imgui sajson glad)
+set_target_properties(hamzstlabphysics PROPERTIES
 	CXX_STANDARD 11
     CXX_STANDARD_REQUIRED YES
     CXX_EXTENSIONS NO
@@ -72,9 +73,9 @@ set_target_properties(testbed PROPERTIES
 
 # Copy font files, etc
 add_custom_command(
-        TARGET testbed POST_BUILD
+        TARGET hamzstlabphysics POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_directory
                 ${CMAKE_CURRENT_SOURCE_DIR}/data/
                 ${CMAKE_CURRENT_BINARY_DIR}/data/)
 
-source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${TESTBED_SOURCE_FILES})
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${HAMZSTLABPHYSICS_SOURCE_FILES})

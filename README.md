@@ -19,17 +19,19 @@ Assuming you are using UNIX / Linux OS. These commands below are designated for 
 Go to `/dependencies/` then open terminal
 
 ```
-tar -xvf box2d-2.4.2.tar.gz
 cd box2d-2.4.2
 
 mkdir build
 cd build
-cmake -DBUILD_SHARED_LIBS=ON -DCMAKE_INSTALL_PREFIX=/usr ..
+cmake -DBOX2D_BUILD_TESTBED=OFF -DBOX2D_BUILD_UNIT_TESTS=OFF -DBUILD_SHARED_LIBS=ON -DCMAKE_INSTALL_PREFIX=/usr ..
 make
 make install
 ```
 
 It will install / put `libbox2d.so` into `/usr/lib` and also the `/include` folder that contain tons of header files for Box2D will be installed in `/usr/include`.
+
+We have modified some source codes of Box2D so it will show the dynamic body with different color for different mass bodies (light body, medium body, heavy body).
+If you would like to stay with the original coloring then you should download the official Box2D version 2.4.2 from Erin Catto' github/website.
 
 Box2D itself requires some dependencies:
 
@@ -68,7 +70,9 @@ After that don't forget to adjust the `/CMakeLists.txt` at the root directory, t
 | Crate Pendulum    | <img src="https://github.com/glanzkaiser/Hamzstlab-Physics/blob/main/images/2.png" width="83%">
 | Circular Motion   | <img src="https://github.com/glanzkaiser/Hamzstlab-Physics/blob/main/images/3.png" width="83%">
 | Spring Two Masses | <img src="https://github.com/glanzkaiser/Hamzstlab-Physics/blob/main/images/4.png" width="83%">
+| Water Tank Mixing | <img src="https://github.com/glanzkaiser/Hamzstlab-Physics/blob/main/images/Watertankmixing3.gif" width="83%">
 
 # Source
 
 1. David Halliday, Robert Resnick, and Jearl Walker, Fundamental of Physics 10th Edition.
+2. Boyce, William E., DiPrima, Richard C., Elementary Differential Equations and Boundary Value Problems Edition.
