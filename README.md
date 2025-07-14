@@ -28,6 +28,19 @@ make
 make install
 ```
 
+You can also use this alternative:
+
+```
+cd box2d-2.4.2
+
+mkdir build
+cd build
+ccmake ..
+make
+make install
+```
+choose from the GUI on terminal to only build the shared library.
+
 It will install / put `libbox2d.so` into `/usr/lib` and also the `/include` folder that contain tons of header files for Box2D will be installed in `/usr/include`.
 
 We have modified some source codes of Box2D so it will show the dynamic body with different color for different mass bodies (light body, medium body, heavy body).
@@ -53,7 +66,7 @@ cd build
 cmake ..
 make
 
-./testbed
+./hamzstlabphysics
 ```
 
 It will open the Imgui window console / GUI.
