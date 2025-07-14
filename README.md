@@ -39,6 +39,8 @@ ccmake ..
 make
 make install
 ```
+<img src="https://github.com/glanzkaiser/Hamzstlab-Physics/blob/main/images/5.png" width="50%">
+
 choose from the GUI on terminal to only build the shared library.
 
 It will install / put `libbox2d.so` into `/usr/lib` and also the `/include` folder that contain tons of header files for Box2D will be installed in `/usr/include`.
@@ -85,7 +87,11 @@ After that don't forget to adjust the `/CMakeLists.txt` at the root directory, t
 | Spring Two Masses | <img src="https://github.com/glanzkaiser/Hamzstlab-Physics/blob/main/images/4.png" width="83%">
 | Water Tank Mixing | <img src="https://github.com/glanzkaiser/Hamzstlab-Physics/blob/main/images/Watertankmixing3.gif" width="83%">
 
+The water tank mixing is a test of creating the 2D version from Example 1 from chapter 2.3 of the Boyce DiPrima book [2].
+
+<img src="https://github.com/glanzkaiser/Hamzstlab-Physics/blob/main/images/6.png" width="60%">
+
 # Source
 
 1. David Halliday, Robert Resnick, and Jearl Walker, Fundamental of Physics 10th Edition.
-2. Boyce, William E., DiPrima, Richard C., Elementary Differential Equations and Boundary Value Problems Edition.
+2. Boyce, William E., DiPrima, Richard C., Elementary Differential Equations and Boundary Value Problems 9th Edition.
