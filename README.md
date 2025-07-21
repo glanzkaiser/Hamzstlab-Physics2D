@@ -5,6 +5,8 @@ The main purpose is to be able to simulate basic Physics problems from undergrad
 
 In some of the examples, we have add the codes to export textfile of the simulation' computation so we can plot it later on with plotting library like `gnuplot`.
 
+<img src="https://github.com/glanzkaiser/Hamzstlab-Physics/blob/main/images/HamzstlabLogo972.png" width="51%">
+
 ## Dependencies
 
 1. Box2D
