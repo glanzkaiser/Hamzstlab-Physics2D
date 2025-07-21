@@ -27,7 +27,7 @@
 #include "imgui/imgui.h"
 using namespace std;
 
-class WaterTank : public Test
+class FillingWaterTank : public Test
 {
 public:
 
@@ -36,7 +36,7 @@ public:
 		e_count = 5100
 	};
 
-	WaterTank()
+	FillingWaterTank()
 	{
 		b2Body* ground = NULL;
 		{
@@ -53,7 +53,7 @@ public:
 
 			// Create the container
 			b2PolygonShape shape;
-			shape.SetAsBox(0.5f, 8.0f, b2Vec2( 10.0f, 2.0f), 0.0); // Right
+			shape.SetAsBox(0.5f, 10.0f, b2Vec2( 10.0f, 0.0f), 0.0); // Right
 			body->CreateFixture(&shape, 5.0f);
 			shape.SetAsBox(0.5f, 8.2f, b2Vec2(-10.0f, -2.0f), 0.0); // Left
 			body->CreateFixture(&shape, 5.0f);
@@ -113,58 +113,6 @@ public:
 			shape.SetTwoSided(b2Vec2(-40.0f, -10.0f), b2Vec2(999.0f, -10.0f));
 			ground->CreateFixture(&shape, 0.0f);
 		}
-		// Create the mixer
-		{
-			b2Body* prevBody = ground;
-			// Define crank.
-			{
-				b2PolygonShape shape;
-				shape.SetAsBox(0.2f, 3.0f);
-
-				b2BodyDef bd;
-				bd.type = b2_dynamicBody;
-				bd.position.Set(0.0f, 10.0f);
-				b2Body* body = m_world->CreateBody(&bd);
-				body->CreateFixture(&shape, 2.0f);
-
-				b2RevoluteJointDef rjd;
-				rjd.Initialize(prevBody, body, b2Vec2(0.0f, 10.0f));
-				rjd.motorSpeed = 0.5f * b2_pi;
-				rjd.maxMotorTorque = 10000.0f;
-				rjd.enableMotor = true;
-				m_joint1 = (b2RevoluteJoint*)m_world->CreateJoint(&rjd);
-
-				prevBody = body;
-			}
-		}
-		
-		// 1st alternative to create salt water in the tank
-		{
-			b2CircleShape shape;
-			shape.m_p.SetZero();
-			shape.m_radius = 0.4f;
-
-			float minX = -6.0f;
-			float maxX = 0.0f;
-			float minY = 4.0f;
-			float maxY = 6.0f;
-			
-			b2FixtureDef ballFixtureDef3;
-			ballFixtureDef3.restitution = 0.05f;
-			ballFixtureDef3.density = 5.1f; // this will affect the ball mass
-			ballFixtureDef3.friction = 0.1f;
-			ballFixtureDef3.shape = &shape;
-			
-			for (int32 i = 0; i < 410; ++i)
-			{
-				b2BodyDef bd;
-				bd.type = b2_dynamicBody;
-				bd.position = b2Vec2(RandomFloat(minX,maxX),RandomFloat(minY,maxY));
-				m_ball0 = m_world->CreateBody(&bd);
-				m_ball0->CreateFixture(&shape, 5.1f); // will affect the ball mass
-				m_ball0->SetAngularVelocity(1.0f);
-			}
-		}
 			
 		m_count = 0;
 		m_count2 = 0;
@@ -174,63 +122,46 @@ public:
 	b2RevoluteJoint* m_joint1;
 	b2RevoluteJoint* m_joint2;
 	int32 m_count, m_count2;
-	float m_time, num_ball, num_ball2, mass_ball0, mass_ball1, mass_ball2, v_ballentering, v_ball1;
+	float m_time, num_ball, mass_ball1, v_ballentering, v_ball1;
 	b2Body* m_ball;
-	b2Body* m_ball0;
-	b2Body* m_ballinside;
 
 	bool m_button;
+	double division(double x, double y)
+	{
+		return x/y;
+	}
 
 	void Step(Settings& settings) override
 	{
 		Test::Step(settings);
 		m_time += 1.0f / 60.0f;	// assuming we are using frequency of 60 Hertz 
 		
-		b2MassData massData0= m_ball0->GetMassData();
-		mass_ball0 = massData0.mass;
-		float r = 5, h = 10;
+		float r = 5, h = 10, r_ball = 0.3;
 		float Vwatertank = b2_pi*r*r*h;
-		g_debugDraw.DrawString(5, m_textLine, "Time (in seconds)= %.2f", m_time);
+		float Vball = division(4,3)*b2_pi*r_ball*r_ball*r_ball;
+		float particle = division(Vwatertank,Vball);
+		g_debugDraw.DrawString(5, m_textLine, "Time (in seconds) = %.2f", m_time);
 		m_textLine += m_textIncrement;
-		g_debugDraw.DrawString(5, m_textLine, "Volume of the water tank= %.5f", Vwatertank);
+		g_debugDraw.DrawString(5, m_textLine, "Volume of the water tank = %.5f", Vwatertank);
 		m_textLine += m_textIncrement;
-		g_debugDraw.DrawString(5, m_textLine, "Rate of salt water that is entering the tank= %4.0f", v_ball1);
+		g_debugDraw.DrawString(5, m_textLine, "Volume of a water particle = %.5f", Vball);
 		m_textLine += m_textIncrement;
-		g_debugDraw.DrawString(5, m_textLine, "Salt Water particle entering the tank= %4.0f", num_ball);
+		g_debugDraw.DrawString(5, m_textLine, "Amount of water particles fit in the tank = %.5f", particle);
 		m_textLine += m_textIncrement;
-		g_debugDraw.DrawString(5, m_textLine, "Salt Water particle in the tank= %4.0f", num_ball2+410);
+		g_debugDraw.DrawString(5, m_textLine, "Speed of salt water that is entering the tank = %4.2f", v_ball1);
 		m_textLine += m_textIncrement;
-		//g_debugDraw.DrawString(5, m_textLine, "The mass of a Fluid particle in the tank from alt 1= %4.2f", mass_ball0);
+		//g_debugDraw.DrawString(5, m_textLine, "Salt Water particle entering the tank = %4.0f", num_ball);
 		//m_textLine += m_textIncrement;
-		g_debugDraw.DrawString(5, m_textLine, "The mass of a Fluid particle in the tank = %4.2f", mass_ball2);
-		m_textLine += m_textIncrement;
 		g_debugDraw.DrawString(5, m_textLine, "The mass of a Fluid that is entering the tank = %4.2f", mass_ball1);
 		m_textLine += m_textIncrement;
 		
-		float torque = m_joint1->GetMotorTorque(settings.m_hertz);
-		float omega = m_joint1->GetMotorSpeed();
-		g_debugDraw.DrawString(5, m_textLine, "Mixer motor Torque = %5.0f", (float) torque);
-		m_textLine += m_textIncrement;
-		g_debugDraw.DrawString(5, m_textLine, "Mixer speed= %5.0f", (float) omega);
-		m_textLine += m_textIncrement;
-		g_debugDraw.DrawString(5, m_textLine, "Press 'a' to add the mixer speed");
-		m_textLine += m_textIncrement;
-		g_debugDraw.DrawString(5, m_textLine, "Press 's' to stop the mixer");
-		m_textLine += m_textIncrement;
-		g_debugDraw.DrawString(5, m_textLine, "Press 'b' to set the mixer speed to 10");
-		m_textLine += m_textIncrement;		
-		g_debugDraw.DrawString(5, m_textLine, "Press 'n' to set the mixer speed to 20");
-		m_textLine += m_textIncrement;		
-		g_debugDraw.DrawString(5, m_textLine, "Press 'm' to set the mixer speed to 30");
-		m_textLine += m_textIncrement;
-
 				
 		if (m_count < e_count)
 		{
 			// Create small ball as representation of fluid of water that will be going to the water tank
 			b2CircleShape ballShape;
 			ballShape.m_p.SetZero();
-			ballShape.m_radius = 0.2f;
+			ballShape.m_radius = 0.4f;
 			
 			b2FixtureDef ballFixtureDef;
 			ballFixtureDef.restitution = 0.1f;
@@ -244,7 +175,7 @@ public:
 			m_ball = m_world->CreateBody(&ballBodyDef);
 			b2Fixture *ballFixture = m_ball->CreateFixture(&ballFixtureDef);	
 			m_ball->SetAngularVelocity(1.0f);
-			m_ball->SetLinearVelocity(b2Vec2(19.5f, 0.0f));
+			m_ball->SetLinearVelocity(b2Vec2(25.0f, 0.0f));
 
 			b2MassData massDataentering = m_ball->GetMassData();
 			mass_ball1 = massDataentering.mass;
@@ -254,33 +185,7 @@ public:
 			++m_count;	
 			num_ball = m_count;
 		}
-		// Alternative 2 to create fluid inside the tank
-		if (m_count2 < 100)
-		{
-			// Create small ball as representation of fluid of water that is inside the water tank
-			b2CircleShape ballShape2;
-			ballShape2.m_p.SetZero();
-			ballShape2.m_radius = 0.4f;
-			//ballShape2.color(0.9f, 0.3f, 0.3f); // how to change color?
-			
-			b2FixtureDef ballFixtureDef2;
-			ballFixtureDef2.restitution = 0.05f;
-			ballFixtureDef2.density = 5.1f; // this will affect the ball mass
-			ballFixtureDef2.friction = 0.1f;
-			ballFixtureDef2.shape = &ballShape2;
-			
-			b2BodyDef ballBodyDef2;
-			ballBodyDef2.type = b2_dynamicBody;
-			ballBodyDef2.position.Set(0.0f, 10.0f);
-			
-			m_ballinside = m_world->CreateBody(&ballBodyDef2);
-			b2Fixture *ballFixture2 = m_ballinside->CreateFixture(&ballFixtureDef2);	
-			b2MassData massDatainside = m_ballinside->GetMassData();
-			mass_ball2 = massDatainside.mass;
-			++m_count2;
-			num_ball2 = m_count2 ;
-			
-		}
+		
 	}
 	
 	/*void UpdateUI() override
@@ -296,36 +201,12 @@ public:
 		ImGui::End();
 	}*/	
 
-	void Keyboard(int key) override
-	{
-		float omega3 = m_joint1->GetMotorSpeed();
-		//float theta1 = m_ball->GetLinearVelocity().x;	
-		switch (key)
-		{
-		case GLFW_KEY_A:
-			m_joint1->SetMotorSpeed(omega3+m_time);		
-			break;
-		case GLFW_KEY_S:
-			m_joint1->SetMotorSpeed(0.0f);
-			break;
-		case GLFW_KEY_B:
-			m_joint1->SetMotorSpeed(10.0f);
-			break;
-		case GLFW_KEY_N:
-			m_joint1->SetMotorSpeed(20.0f);
-			break;
-		case GLFW_KEY_M:
-			m_joint1->SetMotorSpeed(30.0f);
-			break;
-		
-		}
-	}
 
 	static Test* Create()
 	{
-		return new WaterTank;
+		return new FillingWaterTank;
 	}
 
 };
 
-static int testIndex = RegisterTest("Physics with ODE", "Water Tank", WaterTank::Create);
+static int testIndex = RegisterTest("Physics with ODE", "Filling a Water Tank", FillingWaterTank::Create);

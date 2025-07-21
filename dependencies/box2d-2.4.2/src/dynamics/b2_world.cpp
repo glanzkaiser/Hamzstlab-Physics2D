@@ -1125,20 +1125,30 @@ void b2World::DebugDraw()
 					// Bad body
 					DrawShape(f, xf, b2Color(1.0f, 0.0f, 0.0f));
 				}
-				else if (b->GetType() == b2_dynamicBody && b->m_mass >= 0.1f && b->m_mass <=2.0f)
+				else if (b->GetType() == b2_dynamicBody && b->m_mass >= 0.01f && b->m_mass <=2.0f)
 				{
 					// light body
-					DrawShape(f, xf, b2Color(0.1f, 0.8f, 0.3f));
+					DrawShape(f, xf, b2Color(0.855f, 0.647f, 0.125f)); // Golden rod
 				}
-				else if (b->GetType() == b2_dynamicBody && b->m_mass >= 2.0f && b->m_mass <=10.0f)
+				else if (b->GetType() == b2_dynamicBody && b->m_mass >= 2.0f && b->m_mass <=3.0f)
+				{
+					// medium light body
+					DrawShape(f, xf, b2Color(0.0f, 0.808f, 0.82f)); // Dark turquoise
+				}
+				else if (b->GetType() == b2_dynamicBody && b->m_mass >= 3.0f && b->m_mass <=5.0f)
 				{
 					// medium body
-					DrawShape(f, xf, b2Color(0.1f, 0.3f, 0.7f));
+					DrawShape(f, xf, b2Color(1.0f, 0.55f, 0.0f)); // Dark orange
+				}
+				else if (b->GetType() == b2_dynamicBody && b->m_mass >= 5.0f && b->m_mass <=10.0f)
+				{
+					// medium level 2 body
+					DrawShape(f, xf, b2Color(0.133f, 0.545f, 0.133f)); // Forest green
 				}
 				else if (b->GetType() == b2_dynamicBody && b->m_mass >= 10.0f)
 				{
 					// heavy body
-					DrawShape(f, xf, b2Color(0.8f, 0.2f, 0.2f));
+					DrawShape(f, xf, b2Color(0.698f, 0.133f, 0.133f)); // Firebrick
 				}
 				else if (b->IsEnabled() == false)
 				{

@@ -12,6 +12,7 @@ set (HAMZSTLABPHYSICS_SOURCE_FILES
 	test.h
 	tests/test.cpp
 	tests/ode_watertankmixing.cpp
+	tests/ode_watertankfilling.cpp
 	tests/stir_liquid.cpp
 	tests/circular_motion.cpp
 	tests/circular_motionbox.cpp

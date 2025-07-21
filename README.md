@@ -85,7 +85,8 @@ After that don't forget to adjust the `/CMakeLists.txt` at the root directory, t
 | Crate Pendulum    | <img src="https://github.com/glanzkaiser/Hamzstlab-Physics/blob/main/images/2.png" width="83%">
 | Circular Motion   | <img src="https://github.com/glanzkaiser/Hamzstlab-Physics/blob/main/images/3.png" width="83%">
 | Spring Two Masses | <img src="https://github.com/glanzkaiser/Hamzstlab-Physics/blob/main/images/4.png" width="83%">
-| Water Tank Mixing | <img src="https://github.com/glanzkaiser/Hamzstlab-Physics/blob/main/images/Watertankmixing3.gif" width="83%">
+| Water Tank Mixing | <img src="https://github.com/glanzkaiser/Hamzstlab-Physics/blob/main/images/tankwaterfinal2.gif" width="83%">
+| Filling Water Tank| <img src="https://github.com/glanzkaiser/Hamzstlab-Physics/blob/main/images/fillingwatertank.gif" width="83%">
 
 The water tank mixing is a test of creating the 2D version from Example 1 from chapter 2.3 of the Boyce DiPrima book [2].
 
