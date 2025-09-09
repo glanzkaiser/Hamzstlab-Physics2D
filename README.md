@@ -1,17 +1,17 @@
-# Hamzstlab-Physics
+# About
 We create a lot of examples of Physics problems from Fundamental of Physics book and remove the original examples from Box2D version 2.4.2.
 
-The main purpose is to be able to simulate basic Physics problems from undergraduate degree. 
+The main purpose is to be able to simulate basic Physics problems from undergraduate degree in 2-dimension. 
 
 In some of the examples, we have add the codes to export textfile of the simulation' computation so we can plot it later on with plotting library like `gnuplot`.
 
-<img src="https://github.com/glanzkaiser/Hamzstlab-Physics/blob/main/images/HamzstlabLogo972.png" width="51%">
+<img src="https://github.com/glanzkaiser/Hamzstlab-Physics2D/blob/main/images/HamzstlabLogo972.png" width="51%">
 
 ## Dependencies
 
 1. Box2D
 
-Box2D v2.4.2 is the main engine behind Hamzstlab Physics. In this version of Hamzstlab Physics (v1.5), we still use Box2D v2.4.2 that are still using C++. The newest of Box2D v3.1.0 / v3 above is using C now.
+Box2D v2.4.2 is the main engine behind Hamzstlab Physics. In this version of Hamzstlab Physics 2D(v1.5), we still use Box2D v2.4.2 that are still using C++. The newest of Box2D v3.1.0 / v3 above is using C now.
 
 You have to create the shared library of Box2D first then install it in `/usr/` or `/usr/local` or any prefix that already set as a location to look for library files and include folder.
 
@@ -41,7 +41,7 @@ ccmake ..
 make
 make install
 ```
-<img src="https://github.com/glanzkaiser/Hamzstlab-Physics/blob/main/images/5.png" width="50%">
+<img src="https://github.com/glanzkaiser/Hamzstlab-Physics2D/blob/main/images/5.png" width="50%">
 
 choose from the GUI on terminal to only build the shared library.
 
@@ -83,17 +83,18 @@ After that don't forget to adjust the `/CMakeLists.txt` at the root directory, t
 
 | Name | Simulation |
 | -------------     | ------------- | 
-| Vertical Spring   | <img src="https://github.com/glanzkaiser/Hamzstlab-Physics/blob/main/images/1.png" width="83%">
-| Crate Pendulum    | <img src="https://github.com/glanzkaiser/Hamzstlab-Physics/blob/main/images/2.png" width="83%">
-| Circular Motion   | <img src="https://github.com/glanzkaiser/Hamzstlab-Physics/blob/main/images/3.png" width="83%">
-| Spring Two Masses | <img src="https://github.com/glanzkaiser/Hamzstlab-Physics/blob/main/images/4.png" width="83%">
-| Body Falling in a Dense Fluid | <img src="https://github.com/glanzkaiser/Hamzstlab-Physics/blob/main/images/bodyfallinginadensefluidfinal.gif" width="83%">
-| Water Tank Mixing | <img src="https://github.com/glanzkaiser/Hamzstlab-Physics/blob/main/images/tankwaterfinal2.gif" width="83%">
-| Filling Water Tank| <img src="https://github.com/glanzkaiser/Hamzstlab-Physics/blob/main/images/fillingwatertank.gif" width="83%">
+| Vertical Spring   | <img src="https://github.com/glanzkaiser/Hamzstlab-Physics2D/blob/main/images/1.png" width="83%">
+| Crate Pendulum    | <img src="https://github.com/glanzkaiser/Hamzstlab-Physics2D/blob/main/images/2.png" width="83%">
+| Circular Motion   | <img src="https://github.com/glanzkaiser/Hamzstlab-Physics2D/blob/main/images/3.png" width="83%">
+| Spring Two Masses | <img src="https://github.com/glanzkaiser/Hamzstlab-Physics2D/blob/main/images/4.png" width="83%">
+| Body Falling in a Dense Fluid | <img src="https://github.com/glanzkaiser/Hamzstlab-Physics2D/blob/main/images/bodyfallinginadensefluidfinal.gif" width="83%">
+| Water Tank Mixing | <img src="https://github.com/glanzkaiser/Hamzstlab-Physics2D/blob/main/images/tankwaterfinal2.gif" width="83%">
+| Filling Water Tank| <img src="https://github.com/glanzkaiser/Hamzstlab-Physics2D/blob/main/images/fillingwatertank.gif" width="83%">
+| Double Simple Pendulum   | <img src="https://github.com/glanzkaiser/Hamzstlab-Physics2D/blob/main/images/DoublePendulum.gif" width="83%">
 
 The water tank mixing is a test of creating the 2D version from Example 1 from chapter 2.3 of the Boyce DiPrima book [2].
 
-<img src="https://github.com/glanzkaiser/Hamzstlab-Physics/blob/main/images/6.png" width="60%">
+<img src="https://github.com/glanzkaiser/Hamzstlab-Physics2D/blob/main/images/6.png" width="60%">
 
 # Source
 

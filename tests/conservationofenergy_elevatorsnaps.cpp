@@ -273,7 +273,7 @@ public:
 		m_textLine += m_textIncrement;
 		// Print the result in every time step then plot it into graph with either gnuplot or anything
 
-		printf("%4.2f %4.2f %4.2f\n", velocity.y, position.y, position.y);
+		printf("%4.2f %4.2f %4.2f\n", velocity.y, position.x, position.y);
 		
 		Test::Step(settings);
 	}

@@ -11,6 +11,7 @@ set (HAMZSTLABPHYSICS_SOURCE_FILES
 	test.cpp
 	test.h
 	tests/test.cpp
+	tests/ode_bodyfallinginadensefluid.cpp
 	tests/ode_watertankmixing.cpp
 	tests/ode_watertankfilling.cpp
 	tests/stir_liquid.cpp
@@ -57,6 +58,7 @@ set (HAMZSTLABPHYSICS_SOURCE_FILES
 	tests/gases_container.cpp
 	tests/gravity_check.cpp
 	tests/simple_pendulum.cpp
+	tests/double_pendulum.cpp
 	tests/angular_oscillator.cpp
 )
 
